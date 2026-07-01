@@ -1,4 +1,5 @@
 import sys
+import os
 class Calculator:
     def __init__(self) -> None:
         self.num1 = None
@@ -27,11 +28,16 @@ class Calculator:
 class MenuControl:
     def __init__(self):
         self.C1: Calculator = Calculator()
+
+    def clearTerminal(self):
+        os.system('cls' if os.name == 'nt' else 'clear')
+
     def homeMenu(self) -> None:
         print(f"Nathan's Calculator"
               f"\n(a) Start"
               f"\n(b) Quit")
         choice = input("Enter Choice:")
+        self.clearTerminal()
         if choice == "a" or choice == "A":
             self.inputTwoNum(self.C1)
         else:
@@ -41,7 +47,8 @@ class MenuControl:
         print(f"(a) Apply operation on previous output"
               f"\n(b) Clear"
               f"\n(c) Quit")
-        choice = input("\nEnter Choice:")
+        choice = input("Enter Choice:")
+        self.clearTerminal()
         if choice == "a" or choice == "A":
             self.inputOneNum(self.C1)
         elif choice == "b" or choice == "B":
@@ -50,21 +57,25 @@ class MenuControl:
             self.quitScreen()
         else:
             print("Error Invalid Input")
+            self.clearTerminal()
             self.menu(self.C1)
 
     def inputTwoNum(self, obj: Calculator):
         try:
             obj.num1 = float(input("\nEnter the first number:"))
             obj.num2 = float(input("\nEnter the second number:"))
+            self.clearTerminal()
             self.operatorChoice(self.C1)
         except ValueError:
             print("Error enter a number.")
+            self.clearTerminal()
             self.inputTwoNum(self.C1)
 
 
     def inputOneNum(self, obj: Calculator):
         obj.num1 = obj.output
         obj.num2 = float(input("\nInput second number:"))
+        self.clearTerminal()
         self.operatorChoice(self.C1)
         self.menu(self.C1)
 
