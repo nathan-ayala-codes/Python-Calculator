@@ -18,8 +18,11 @@ class Calculator:
         print(f"Answer = {self.output}")
 
     def division(self) -> None:
-        self.output = self.num1 / self.num2
-        print(f"Answer = {self.output}")
+        try:
+            self.output = self.num1 / self.num2
+            print(f"Answer = {self.output}")
+        except ZeroDivisionError:
+            print("Cannot divide by zero, try again")
 
 class MenuControl:
     def __init__(self):
@@ -50,9 +53,14 @@ class MenuControl:
             self.menu(self.C1)
 
     def inputTwoNum(self, obj: Calculator):
-        obj.num1 = float(input("\nEnter the first number:"))
-        obj.num2 = float(input("\nEnter the second number:"))
-        self.operatorChoice(self.C1)
+        try:
+            obj.num1 = float(input("\nEnter the first number:"))
+            obj.num2 = float(input("\nEnter the second number:"))
+            self.operatorChoice(self.C1)
+        except ValueError:
+            print("Error enter a number.")
+            self.inputTwoNum(self.C1)
+
 
     def inputOneNum(self, obj: Calculator):
         obj.num1 = obj.output
@@ -79,3 +87,6 @@ class MenuControl:
         elif operator == "/":
             obj.division()
             self.menu(self.C1)
+        else:
+            print("Invalid Operator, try +, -, *, /")
+            self.operatorChoice(self.C1)
