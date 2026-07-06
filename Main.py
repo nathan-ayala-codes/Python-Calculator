@@ -1,5 +1,7 @@
-import Header
+import tkinter as tk
+from Application import CalculatorApp
 
-M1: Header.MenuControl = Header.MenuControl()
-M1.homeMenu()
-
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = CalculatorApp(root)
+    root.mainloop()
